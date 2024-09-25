@@ -29,6 +29,8 @@ def _extract_details(
     service = provider_units.ShippingService.map(str(rate.serviceId))
     carrierId = provider_units.ShippingService.carrier_id(service.value_or_key)
     rate_provider = provider_units.ShippingService.carrier(service.value_or_key).lower()
+    service_name = (service.name or rate.serviceName.lower().replace(" ", "_")).replace("eshipper_", "")
+
     charges = [
         ("baseCharge", rate.baseCharge),
         ("fuelSurcharge", rate.fuelSurcharge),
@@ -56,8 +58,9 @@ def _extract_details(
             if amount
         ],
         meta=dict(
+            carrier=rate_provider,
             rate_provider=rate_provider,
-            service_name=rate.serviceName or service.name,
+            service_name=service_name,
             carrierId=carrierId,
             serviceName=rate.serviceName,
             carrierName=rate.carrierName,
