@@ -403,6 +403,7 @@ export const ConnectProviderModal = ({
 
                 {carrier_name.toString() in (connection_configs || {}) && (
                   <div className="mt-4">
+                    {/* @ts-ignore */}
                     <Disclosure>
                       {({ open }) => (
                         <div className="block">

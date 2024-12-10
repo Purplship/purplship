@@ -1075,6 +1075,7 @@ export default function Page(pageProps: any) {
                   {/* CARRIER OPTIONS SECTION */}
                   {Object.keys(carrierOptions).length > 0 && (
                     <div className="card mb-4 px-3 mx-2">
+                      {/* @ts-ignore */}
                       <Disclosure>
                         {({ open }) => (
                           <div className="block">
