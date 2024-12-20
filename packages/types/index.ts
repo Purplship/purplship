@@ -38,6 +38,7 @@ export interface KarrioClientInterface {
   manifests: ManifestsApi;
   config: ConfigurationParameters;
   graphql: GraphQLApi;
+  admin: GraphQLApi;
 }
 
 export class KarrioClient implements KarrioClientInterface {
@@ -92,7 +93,7 @@ export class KarrioClient implements KarrioClientInterface {
   }
 }
 
-class GraphQLApi {
+export class GraphQLApi {
   host: string | undefined;
   axiosInstance: AxiosInstance;
 

@@ -6,15 +6,19 @@ source "bin/activate-env" >/dev/null 2>&1
 # Run server commands
 if [[ "$*" == *gen:ee* ]]; then
     cd "${ROOT:?}"
-    npx apollo service:download --endpoint=http://0.0.0.0:5002/graphql/ "${ROOT:?}/schemas/graphql-ee.json"
+    npx apollo service:download --endpoint=http://localhost:5002/graphql/ "${ROOT:?}/schemas/graphql-ee.json"
     cd -
 elif [[ "$*" == *gen:graph* ]]; then
     cd "${ROOT:?}"
-    npx apollo service:download --endpoint=http://0.0.0.0:5002/graphql/ "${ROOT:?}/schemas/graphql.json"
+    npx apollo service:download --endpoint=http://localhost:5002/graphql/ "${ROOT:?}/schemas/graphql.json"
     cd -
 elif [[ "$*" == *gen:admin* ]]; then
     cd "${ROOT:?}"
-    npx apollo service:download --endpoint=http://0.0.0.0:5002/admin/graphql/ "${ROOT:?}/schemas/graphql-admin.json"
+    npx apollo service:download --endpoint=http://localhost:5002/admin/graphql/ "${ROOT:?}/schemas/graphql-admin.json"
+    cd -
+elif [[ "$*" == *gen:platform* ]]; then
+    cd "${ROOT:?}"
+    npx apollo service:download --endpoint=http://0.0.0.0:5002/admin/graphql/ "${ROOT:?}/ee/platform/schemas/graphql-platform.json"
     cd -
 elif [[ "$*" == *gen:openapi* ]]; then
     cd "${ROOT:?}"
@@ -48,6 +52,7 @@ else
     echo "gen:ee - Generate GraphQL ee schema"
     echo "gen:graph - Generate GraphQL schema"
     echo "gen:admin - Generate Admin GraphQL schema"
+    echo "gen:platform - Generate Platform GraphQL schema"
     echo "gen:openapi - Generate OpenAPI schema"
     echo "gen:ts:cli - Generate Typescript fetch client"
     echo "build:js - Build Browser Javascript client"

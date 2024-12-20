@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+npx apollo-codegen generate "ee/platform/packages/console/types/graphql/platform/queries.ts" \
+    --schema "ee/platform/schemas/graphql-platform.json" \
+    --target typescript \
+    --output "ee/platform/packages/console/types/graphql/platform/types.ts"
