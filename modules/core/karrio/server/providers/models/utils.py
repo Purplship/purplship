@@ -23,7 +23,7 @@ def has_rate_sheet(carrier_name: str):
             "service_list",
             property(
                 lambda self: (
-                    self.services.all()
+                    self.services
                     if self.rate_sheet is None and hasattr(self, "services")
                     else self.rate_sheet.services.all()
                 )

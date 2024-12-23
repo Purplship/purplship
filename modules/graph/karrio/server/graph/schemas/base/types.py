@@ -166,6 +166,7 @@ class SystemUsageType:
     total_trackers: typing.Optional[int] = None
     total_shipments: typing.Optional[int] = None
     organization_count: typing.Optional[int] = None
+    user_count: typing.Optional[int] = None
     total_shipping_spend: typing.Optional[float] = None
     api_errors: typing.Optional[typing.List[utils.UsageStatType]] = None
     api_requests: typing.Optional[typing.List[utils.UsageStatType]] = None
@@ -282,7 +283,8 @@ class SystemUsageType:
         total_shipping_spend = lib.to_money(
             sum([item["count"] for item in shipping_spend], 0.0)
         )
-        organization_count = 0
+        user_count = User.objects.count()
+        organization_count = 1
 
         if conf.settings.MULTI_ORGANIZATIONS:
             import karrio.server.orgs.models as orgs
@@ -296,6 +298,7 @@ class SystemUsageType:
             total_trackers=total_trackers,
             total_shipments=total_shipments,
             organization_count=organization_count,
+            user_count=user_count,
             total_shipping_spend=total_shipping_spend,
             api_errors=[utils.UsageStatType.parse(item) for item in api_errors],
             api_requests=[utils.UsageStatType.parse(item) for item in api_requests],

@@ -2,10 +2,10 @@ import typing
 from django.urls import reverse
 from rest_framework.request import Request
 
-from karrio.server.conf import settings
+import karrio.lib as lib
+import karrio.server.conf as conf
 import karrio.core.units as units
 import karrio.references as references
-import karrio.server.providers.models as providers
 
 
 PACKAGE_MAPPERS = references.collect_providers_data()
@@ -46,14 +46,17 @@ def contextual_metadata(request: Request):
     host = _host[:-1] if _host[-1] == "/" else _host
 
     return {
-        "VERSION": settings.VERSION,
-        "APP_NAME": settings.APP_NAME,
-        "APP_WEBSITE": settings.APP_WEBSITE,
+        "VERSION": conf.settings.VERSION,
+        "APP_NAME": conf.settings.APP_NAME,
+        "APP_WEBSITE": conf.settings.APP_WEBSITE,
         "HOST": f"{host}/",
         "ADMIN": f"{host}/admin",
         "GRAPHQL": f"{host}/graphql",
         "OPENAPI": f"{host}/openapi",
-        **{flag: getattr(settings, flag, None) for flag, _ in settings.FEATURE_FLAGS},
+        **{
+            flag: getattr(conf.settings, flag, None)
+            for flag, _ in conf.settings.FEATURE_FLAGS
+        },
     }
 
 
@@ -101,7 +104,12 @@ def contextual_reference(request: Request = None, reduced: bool = True):
         }
         extra_services = {
             f"{c.credentials.get('custom_carrier_name') or 'generic'}": {
-                s.service_code: s.service_code for s in c.services.all()
+                s.service_code: s.service_code
+                for s in c.services
+                or [
+                    lib.to_object(lib.models.ServiceLevel, _)
+                    for _ in references["service_levels"][c.ext]
+                ]
             }
             for c in custom_carriers
         }

@@ -171,8 +171,10 @@ class Carrier(core.OwnedEntity):
 
     @property
     def services(self) -> typing.Optional[typing.List[dict]]:
+
         if self.rate_sheet is None:
             return None
+
         return self.rate_sheet.services.all()
 
     @property

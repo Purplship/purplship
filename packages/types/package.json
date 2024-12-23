@@ -5,5 +5,8 @@
   "dependencies": {
     "axios": "^1.6.2",
     "graphql-tag": "^2.12.6"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.2.3"
   }
 }

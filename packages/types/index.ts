@@ -88,8 +88,11 @@ export class KarrioClient implements KarrioClientInterface {
     this.documents = new DocumentsApi(config, config.basePath, axiosInstance);
     this.manifests = new ManifestsApi(config, config.basePath, axiosInstance);
     this.batches = new BatchesApi(config, config.basePath, axiosInstance);
-    this.graphql = new GraphQLApi(config.basePath, axiosInstance);
-    this.admin = new GraphQLApi(`${config.basePath}/admin`, axiosInstance);
+    this.graphql = new GraphQLApi(`${config.basePath}/graphql`, axiosInstance);
+    this.admin = new GraphQLApi(
+      `${config.basePath}/admin/graphql`,
+      axiosInstance,
+    );
   }
 }
 
@@ -111,7 +114,7 @@ export class GraphQLApi {
       ...config
     } = args || {};
     try {
-      const APIUrl = url || `${this.host}/graphql`;
+      const APIUrl = url || `${this.host}`;
       const variables = data ? { data } : reqVariables;
       const { data: response } = await this.axiosInstance.post<{
         data?: T;
