@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ExternalApi.Models.Quoting" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ExternalApi.Models.Quoting" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="QuoteRequestModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Collection" nillable="true" type="tns:From" />
+      <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Dutiable" nillable="true" type="tns:Dutiable" />
+      <xs:element minOccurs="0" name="Pieces" nillable="true" type="tns:ArrayOfQuoteRequestPiece" />
+      <xs:element minOccurs="0" name="ShippingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Specials" nillable="true" type="tns:ArrayOfQuoteSpecials" />
+      <xs:element minOccurs="0" name="Town" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zipcode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuoteRequestModel" nillable="true" type="tns:QuoteRequestModel" />
+  <xs:complexType name="From">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Town" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zipcode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="From" nillable="true" type="tns:From" />
+  <xs:complexType name="Dutiable">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Dutiable" nillable="true" type="tns:Dutiable" />
+  <xs:complexType name="ArrayOfQuoteRequestPiece">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QuoteRequestPiece" nillable="true" type="tns:QuoteRequestPiece" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuoteRequestPiece" nillable="true" type="tns:ArrayOfQuoteRequestPiece" />
+  <xs:complexType name="QuoteRequestPiece">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Height" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Length" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NumberOfPieces" type="xs:int" />
+      <xs:element minOccurs="0" name="Weight" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Width" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuoteRequestPiece" nillable="true" type="tns:QuoteRequestPiece" />
+  <xs:complexType name="ArrayOfQuoteSpecials">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QuoteSpecials" type="tns:QuoteSpecials" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuoteSpecials" nillable="true" type="tns:ArrayOfQuoteSpecials" />
+  <xs:simpleType name="QuoteSpecials">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ddp">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">22</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Pallet">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">21</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NonStackablePallet">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">72</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="QuoteSpecials" nillable="true" type="tns:QuoteSpecials" />
+</xs:schema>

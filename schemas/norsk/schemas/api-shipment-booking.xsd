@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ExternalApi.Models.Booking" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ExternalApi.Models.Booking" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Lightweight.Controllers" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Shipping.Store" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/NodaTime" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ShipmentBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Collection" nillable="true" type="tns:CollectionAddress" />
+      <xs:element minOccurs="0" name="Consignee" nillable="true" type="tns:Address" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomDeclarations" nillable="true" type="tns:Declarations" />
+      <xs:element minOccurs="0" name="DDP" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExportCustoms" nillable="true" type="tns:ExportCustoms" />
+      <xs:element minOccurs="0" name="Hawb" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabelFormat" xmlns:q1="http://schemas.datacontract.org/2004/07/Lightweight.Controllers" type="q1:LabelFormat" />
+      <xs:element minOccurs="0" name="LabelSize" xmlns:q2="http://schemas.datacontract.org/2004/07/Shipping.Store" type="q2:LabelSize" />
+      <xs:element minOccurs="0" name="NewShipment" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NonDox" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NorskBarcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pallet" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Picking" nillable="true" type="tns:Picking" />
+      <xs:element minOccurs="0" name="Pieces" nillable="true" type="tns:ArrayOfPiece" />
+      <xs:element minOccurs="0" name="ReadyByDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Requestor" nillable="true" type="tns:Requester" />
+      <xs:element minOccurs="0" name="Service" nillable="true" type="tns:Service" />
+      <xs:element minOccurs="0" name="Shipper" nillable="true" type="tns:ShipperAddress" />
+      <xs:element minOccurs="0" name="Site" nillable="true" type="tns:SiteDetails" />
+      <xs:element minOccurs="0" name="Specials" nillable="true" type="tns:Specials" />
+      <xs:element minOccurs="0" name="StatusId" type="xs:int" />
+      <xs:element minOccurs="0" name="Value" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShipmentBookingRequest" nillable="true" type="tns:ShipmentBookingRequest" />
+  <xs:complexType name="CollectionAddress">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseAddress">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CloseTime" xmlns:q3="http://schemas.datacontract.org/2004/07/NodaTime" type="q3:LocalTime" />
+          <xs:element minOccurs="0" name="PackageLocation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PickupType" type="tns:PickupType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CollectionAddress" nillable="true" type="tns:CollectionAddress" />
+  <xs:complexType name="BaseAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Company" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContactName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Division" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DivisionCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MobileNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zipcode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseAddress" nillable="true" type="tns:BaseAddress" />
+  <xs:simpleType name="PickupType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pickup">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PickupType" nillable="true" type="tns:PickupType" />
+  <xs:complexType name="Address">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseAddress">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EORI" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VAT" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Address" nillable="true" type="tns:Address" />
+  <xs:complexType name="Declarations">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PreferentialOrigin" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Declarations" nillable="true" type="tns:Declarations" />
+  <xs:complexType name="ExportCustoms">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CurrencyCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceConsignee" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceType" type="tns:InvoiceType" />
+      <xs:element minOccurs="0" name="PayeeOfGST" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TermsOfPayment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TermsOfTrade" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TypeOfExport" type="tns:TypeOfExport" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExportCustoms" nillable="true" type="tns:ExportCustoms" />
+  <xs:simpleType name="InvoiceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Proforma">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Commercial">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="InvoiceType" nillable="true" type="tns:InvoiceType" />
+  <xs:simpleType name="TypeOfExport">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Temporary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Permanent">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gift">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Repair">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Sample">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Return">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InterCompanyData">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TypeOfExport" nillable="true" type="tns:TypeOfExport" />
+  <xs:complexType name="Picking">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Instructions" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Picking" nillable="true" type="tns:Picking" />
+  <xs:complexType name="ArrayOfPiece">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Piece" nillable="true" type="tns:Piece" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPiece" nillable="true" type="tns:ArrayOfPiece" />
+  <xs:complexType name="Piece">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Depth" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Height" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NumberOfPieces" type="xs:int" />
+      <xs:element minOccurs="0" name="Products" nillable="true" type="tns:ArrayOfProduct" />
+      <xs:element minOccurs="0" name="Weight" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Width" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Piece" nillable="true" type="tns:Piece" />
+  <xs:complexType name="ArrayOfProduct">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Product" nillable="true" type="tns:Product" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProduct" nillable="true" type="tns:ArrayOfProduct" />
+  <xs:complexType name="Product">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CountryOfManufacture" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HSCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductQuantity" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductUnitValue" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProductUnitWeight" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProductValue" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProductWeight" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Product" nillable="true" type="tns:Product" />
+  <xs:complexType name="Requester">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Requester" nillable="true" type="tns:Requester" />
+  <xs:complexType name="Service">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Enhancements" nillable="true" type="tns:ArrayOfEnhancement" />
+      <xs:element minOccurs="0" name="Route" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Supplier" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Service" nillable="true" type="tns:Service" />
+  <xs:complexType name="ArrayOfEnhancement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Enhancement" nillable="true" type="tns:Enhancement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEnhancement" nillable="true" type="tns:ArrayOfEnhancement" />
+  <xs:complexType name="Enhancement">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Enhancement" nillable="true" type="tns:Enhancement" />
+  <xs:complexType name="ShipperAddress">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Address">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IOSS" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ShipperAddress" nillable="true" type="tns:ShipperAddress" />
+  <xs:complexType name="SiteDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContainerReference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SiteDetails" nillable="true" type="tns:SiteDetails" />
+  <xs:complexType name="Specials">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TimedDelivery" type="tns:TimedDelivery" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Specials" nillable="true" type="tns:Specials" />
+  <xs:simpleType name="TimedDelivery">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Pre9" />
+      <xs:enumeration value="Pre12" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TimedDelivery" nillable="true" type="tns:TimedDelivery" />
+</xs:schema>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Lightweight.Controllers" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Lightweight.Controllers" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="LabelFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pdf" />
+      <xs:enumeration value="Epl" />
+      <xs:enumeration value="Zpl" />
+      <xs:enumeration value="Png" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LabelFormat" nillable="true" type="tns:LabelFormat" />
+</xs:schema>

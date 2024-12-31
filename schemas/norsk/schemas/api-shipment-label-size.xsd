@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Shipping.Store" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Shipping.Store" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="LabelSize">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="A4" />
+      <xs:enumeration value="FourBySix" />
+      <xs:enumeration value="FourByEight" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LabelSize" nillable="true" type="tns:LabelSize" />
+</xs:schema>
+<?xml version="1.0" encoding="utf-8"?>
+<tns:schema targetNamespace="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.w3.org/2001/XMLSchema">
+  <tns:element name="schema">
+    <tns:complexType />
+  </tns:element>
+</tns:schema>

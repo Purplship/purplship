@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tns:schema targetNamespace="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.w3.org/2001/XMLSchema">
+  <tns:element name="schema">
+    <tns:complexType />
+  </tns:element>
+</tns:schema>

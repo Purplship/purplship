@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NodaTime" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NodaTime" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="LocalTime">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="xs:schema" />
+      <xs:any />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LocalTime" nillable="true" type="tns:LocalTime" />
+</xs:schema>
