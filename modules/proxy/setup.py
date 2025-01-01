@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.server.proxy",
+    name="karrio_server_proxy",
     version="2024.2",
     description="Multi-carrier shipping API Proxy module",
     long_description=long_description,

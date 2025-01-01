@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.nationex",
+    name="karrio_nationex",
     version="2024.6",
     description="Karrio - Nationex Shipping Extension",
     long_description=long_description,

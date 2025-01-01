@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.dicom",
+    name="karrio_dicom",
     version="2023.9.2",
     description="Karrio - Dicom Shipping extension",
     long_description=long_description,

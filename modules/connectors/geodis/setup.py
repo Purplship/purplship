@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.geodis",
+    name="karrio_geodis",
     version="2024.6",
     description="Karrio - GEODIS Shipping Extension",
     long_description=long_description,

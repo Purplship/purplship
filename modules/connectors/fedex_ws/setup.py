@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.fedex_ws",
+    name="karrio_fedex_ws",
     version="2024.6",
     description="Karrio - Fedex Web Service Shipping extension",
     long_description=long_description,

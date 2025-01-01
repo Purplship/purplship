@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.dhl_parcel_de",
+    name="karrio_dhl_parcel_de",
     version="2024.6",
     description="Karrio - DHL Parcel DE Shipping Extension",
     long_description=long_description,

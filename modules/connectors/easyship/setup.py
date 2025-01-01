@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.easyship",
+    name="karrio_easyship",
     version="2024.12rc9",
     description="Karrio - Easyship Shipping Extension",
     long_description=long_description,

@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.server.events",
+    name="karrio_server_events",
     version="2024.2.15",
     description="Multi-carrier shipping API Events module",
     long_description=long_description,

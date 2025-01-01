@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.allied_express_local",
+    name="karrio_allied_express_local",
     version="2024.6",
     description="Karrio - Allied Express Local Shipping Extension",
     long_description=long_description,

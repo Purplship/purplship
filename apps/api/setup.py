@@ -7,7 +7,7 @@ with open("karrio/server/VERSION", "r") as v:
     version = v.read().strip()
 
 setup(
-    name="karrio.server",
+    name="karrio_server",
     version=version,
     description="Multi-carrier shipping API",
     long_description=long_description,

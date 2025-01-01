@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.purolator",
+    name="karrio_purolator",
     version="2024.6",
     description="Karrio - Purolator Shipping extension",
     long_description=long_description,

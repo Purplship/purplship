@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.easypost",
+    name="karrio_easypost",
     version="2024.6",
     description="Karrio - EasyPost Shipping extension",
     long_description=long_description,

@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.asendia_us",
+    name="karrio_asendia_us",
     version="2024.6",
     description="Karrio - Asendia US Shipping Extension",
     long_description=long_description,

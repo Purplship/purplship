@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.chronopost",
+    name="karrio_chronopost",
     version="2024.6",
     description="Karrio - Chronopost Shipping Extension",
     long_description=long_description,

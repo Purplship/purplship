@@ -1,12 +1,12 @@
-
 """Warning: This setup.py is only there for git install until poetry support git subdirectory"""
+
 from setuptools import setup, find_namespace_packages
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.hay_post",
+    name="karrio_hay_post",
     version="2024.5",
     description="Karrio - HayPost Shipping Extension",
     long_description=long_description,

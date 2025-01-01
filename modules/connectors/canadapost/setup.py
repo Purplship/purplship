@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.canadapost",
+    name="karrio_canadapost",
     version="2024.6.7",
     description="Karrio - Canada Post Shipping Extension",
     long_description=long_description,

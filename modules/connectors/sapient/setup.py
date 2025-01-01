@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.sapient",
+    name="karrio_sapient",
     version="2024.12rc3",
     description="Karrio - SAPIENT Shipping Extension",
     long_description=long_description,

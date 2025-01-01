@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.usps_wt_international",
+    name="karrio_usps_wt_international",
     version="2024.6",
     description="Karrio - USPS Web Tools International Shipping extension",
     long_description=long_description,

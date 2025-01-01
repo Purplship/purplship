@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.server.pricing",
+    name="karrio_server_pricing",
     version="2023.9.4",
     description="Multi-carrier shipping API Pricing panel",
     long_description=long_description,

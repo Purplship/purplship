@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.amazon_shipping",
+    name="karrio_amazon_shipping",
     version="2024.6",
     description="Karrio - Amazon Shipping Extension",
     long_description=long_description,

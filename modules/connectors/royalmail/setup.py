@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.royalmail",
+    name="karrio_royalmail",
     version="2024.6",
     description="Karrio - Royal Mail Shipping extension",
     long_description=long_description,

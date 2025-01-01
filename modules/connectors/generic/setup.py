@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.generic",
+    name="karrio_generic",
     version="2024.2",
     description="Karrio - Custom carrier Shipping extension",
     long_description=long_description,

@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="karrio.tge",
+    name="karrio_tge",
     version="2024.2.5",
     description="Karrio - TGE Shipping Extension",
     long_description=long_description,
