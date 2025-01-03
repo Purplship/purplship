@@ -39,7 +39,7 @@
     "lodash.tonumber": "^4.0.3",
     "mobx": "^6.12.0",
     "moment": "^2.29.4",
-    "next": "15.0.3",
+    "next": "15.1.2",
     "next-auth": "^5.0.0-beta.25",
     "pino": "^7.0.3",
     "posthog-js": "^1.96.1",
