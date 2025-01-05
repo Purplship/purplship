@@ -1,12 +1,5 @@
 {
-  "extends": "../tsconfig/react-library.json",
-  "include": [
-    "./**/*.ts",
-    "./**/*.tsx",
-  ],
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ]
+  "extends": "@karrio/tsconfig/react-library.json",
+  "include": ["./**/*.ts", "./**/*.tsx"],
+  "exclude": ["dist", "build", "node_modules"]
 }

@@ -13,7 +13,9 @@ const nextConfig = {
     "@karrio/ui",
     "@karrio/lib",
     "@karrio/types",
+    "@karrio/trpc",
     "@karrio/insiders",
+    "@karrio/admin",
   ],
   sentry: {
     disableServerWebpackPlugin: true,

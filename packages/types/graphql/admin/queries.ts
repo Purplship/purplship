@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 // -----------------------------------------------------------
-// Admin GraphQL Queries
+// Account Related Queries
 // -----------------------------------------------------------
 //#region
 
@@ -63,10 +63,18 @@ export const GET_ACCOUNTS = gql`
             }
           }
         }
+        cursor
       }
     }
   }
 `;
+
+//#endregion
+
+// -----------------------------------------------------------
+// User Related Queries
+// -----------------------------------------------------------
+//#region
 
 export const GET_USERS = gql`
   query GetUsers($filter: UserFilter) {
@@ -90,58 +98,40 @@ export const GET_USERS = gql`
           last_login
           permissions
         }
+        cursor
       }
     }
   }
 `;
 
-export const GET_SURCHARGES = gql`
-  query GetSurcharges($filter: SurchargeFilter) {
-    surcharges(filter: $filter) {
-      object_type
-      id
-      name
-      active
-      amount
-      carriers
-      services
-      surcharge_type
-      carrier_accounts {
-        id
-        active
-        carrier_id
-        test_mode
-        capabilities
-        carrier_name
-        display_name
+export const GET_GROUP_PERMISSIONS = gql`
+  query GetPermissionGroups($filter: PermissionGroupFilter) {
+    permission_groups(filter: $filter) {
+      page_info {
+        count
+        has_next_page
+        has_previous_page
+        start_cursor
+        end_cursor
+      }
+      edges {
+        node {
+          id
+          name
+          permissions
+        }
+        cursor
       }
     }
   }
 `;
 
-export const GET_SURCHARGE = gql`
-  query GetSurcharge($id: String!) {
-    surcharge(id: $id) {
-      object_type
-      id
-      name
-      active
-      amount
-      carriers
-      services
-      surcharge_type
-      carrier_accounts {
-        id
-        active
-        carrier_id
-        test_mode
-        capabilities
-        carrier_name
-        display_name
-      }
-    }
-  }
-`;
+//#endregion
+
+// -----------------------------------------------------------
+// Carrier Related Queries
+// -----------------------------------------------------------
+//#region
 
 export const GET_SYSTEM_CONNECTIONS = gql`
   query GetSystemConnections {
@@ -191,6 +181,68 @@ export const GET_SYSTEM_CONNECTION = gql`
   }
 `;
 
+//#endregion
+
+// -----------------------------------------------------------
+// Rate Sheet Related Queries
+// -----------------------------------------------------------
+//#region
+
+export const GET_RATE_SHEETS = gql`
+  query GetRateSheets($filter: RateSheetFilter) {
+    rate_sheets(filter: $filter) {
+      page_info {
+        count
+        has_next_page
+        has_previous_page
+        start_cursor
+        end_cursor
+      }
+      edges {
+        node {
+          id
+          name
+          slug
+          carrier_name
+          services {
+            id
+            object_type
+            service_name
+            service_code
+            description
+            active
+            currency
+            transit_days
+            transit_time
+            max_width
+            max_height
+            max_length
+            dimension_unit
+            zones {
+              object_type
+              label
+              rate
+              min_weight
+              max_weight
+              transit_days
+            }
+          }
+          carriers {
+            id
+            active
+            carrier_id
+            carrier_name
+            display_name
+            capabilities
+            test_mode
+          }
+        }
+        cursor
+      }
+    }
+  }
+`;
+
 export const GET_RATE_SHEET = gql`
   query GetRateSheet($id: String!) {
     rate_sheet(id: $id) {
@@ -234,245 +286,56 @@ export const GET_RATE_SHEET = gql`
   }
 `;
 
-export const GET_RATE_SHEETS = gql`
-  query GetRateSheets($filter: RateSheetFilter) {
-    rate_sheets(filter: $filter) {
-      page_info {
-        count
-        has_next_page
-        has_previous_page
-        start_cursor
-        end_cursor
-      }
-      edges {
-        node {
-          id
-          name
-          slug
-          carrier_name
-          services {
-            id
-            service_name
-            service_code
-            description
-            active
-            currency
-            transit_days
-            transit_time
-            max_width
-            max_height
-            max_length
-            dimension_unit
-            zones {
-              label
-              rate
-              min_weight
-              max_weight
-              transit_days
-            }
-          }
-          carriers {
-            id
-            active
-            carrier_id
-            carrier_name
-            display_name
-            capabilities
-            test_mode
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const GET_GROUP_PERMISSIONS = gql`
-  query GetPermissionGroups($filter: PermissionGroupFilter) {
-    permission_groups(filter: $filter) {
-      page_info {
-        count
-        has_next_page
-        has_previous_page
-        start_cursor
-        end_cursor
-      }
-      edges {
-        node {
-          id
-          name
-          permissions
-        }
-      }
-    }
-  }
-`;
-
 //#endregion
 
 // -----------------------------------------------------------
-// Admin GraphQL Mutations
+// Surcharge Related Queries
 // -----------------------------------------------------------
 //#region
 
-export const CREATE_USER = gql`
-  mutation CreateUser($data: CreateUserMutationInput!) {
-    create_user(input: $data) {
-      errors {
-        field
-        messages
-      }
-      user {
-        email
-        full_name
-        is_staff
-        is_active
-        is_superuser
-        date_joined
-        last_login
-      }
-    }
-  }
-`;
-
-export const UPDATE_USER = gql`
-  mutation UpdateUser($data: UpdateUserMutationInput!) {
-    update_user(input: $data) {
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const REMOVE_USER = gql`
-  mutation RemoveUser($data: DeleteUserMutationInput!) {
-    remove_user(input: $data) {
+export const GET_SURCHARGES = gql`
+  query GetSurcharges($filter: SurchargeFilter) {
+    surcharges(filter: $filter) {
+      object_type
       id
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const CREATE_SURCHARGE = gql`
-  mutation CreateSurcharge($data: CreateSurchargeMutationInput!) {
-    create_surcharge(input: $data) {
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const UPDATE_SURCHARGE = gql`
-  mutation UpdateSurcharge($data: UpdateSurchargeMutationInput!) {
-    update_surcharge(input: $data) {
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const DELETE_SURCHARGE = gql`
-  mutation DeleteSurcharge($data: DeleteMutationInput!) {
-    delete_surcharge(input: $data) {
-      id
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const CREATE_CARRIER_CONNECTION = gql`
-  mutation CreateCarrierConnection($data: CreateConnectionMutationInput!) {
-    create_carrier_connection(input: $data) {
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const UPDATE_CARRIER_CONNECTION = gql`
-  mutation UpdateCarrierConnection($data: UpdateConnectionMutationInput!) {
-    update_carrier_connection(input: $data) {
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const DELETE_CARRIER_CONNECTION = gql`
-  mutation DeleteCarrierConnection($data: DeleteConnectionMutationInput!) {
-    delete_carrier_connection(input: $data) {
-      id
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const UPDATE_ORGANIZATION_ACCOUNT = gql`
-  mutation UpdateOrganizationAccount(
-    $data: UpdateOrganizationAccountMutationInput!
-  ) {
-    update_organization_account(input: $data) {
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const CREATE_RATE_SHEET = gql`
-  mutation CreateRateSheet($data: CreateRateSheetMutationInput!) {
-    create_rate_sheet(input: $data) {
-      rate_sheet {
+      name
+      active
+      amount
+      carriers
+      services
+      surcharge_type
+      carrier_accounts {
         id
-      }
-      errors {
-        field
-        messages
-      }
-    }
-  }
-`;
-
-export const UPDATE_RATE_SHEET = gql`
-  mutation UpdateRateSheet($data: UpdateRateSheetMutationInput!) {
-    update_rate_sheet(input: $data) {
-      rate_sheet {
-        id
-      }
-      errors {
-        field
-        messages
+        active
+        carrier_id
+        test_mode
+        capabilities
+        carrier_name
+        display_name
       }
     }
   }
 `;
 
-export const DELETE_RATE_SHEET = gql`
-  mutation DeleteRateSheet($data: DeleteMutationInput!) {
-    delete_rate_sheet(input: $data) {
+export const GET_SURCHARGE = gql`
+  query GetSurcharge($id: String!) {
+    surcharge(id: $id) {
+      object_type
       id
-      errors {
-        field
-        messages
+      name
+      active
+      amount
+      carriers
+      services
+      surcharge_type
+      carrier_accounts {
+        id
+        active
+        carrier_id
+        test_mode
+        capabilities
+        carrier_name
+        display_name
       }
     }
   }

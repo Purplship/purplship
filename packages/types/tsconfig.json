@@ -1,0 +1,12 @@
+{
+  "extends": "@karrio/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@karrio/types/*": ["./*"]
+    },
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": [".", "next-auth.d.ts", "**/*.ts", "**/*.d.ts"],
+  "exclude": ["dist", "build", "node_modules"]
+}

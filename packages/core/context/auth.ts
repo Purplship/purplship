@@ -1,15 +1,15 @@
 import {
   Auth,
-  computeTestMode,
-  KARRIO_API,
   logger,
   parseJwt,
+  KARRIO_API,
+  computeTestMode,
 } from "@karrio/lib";
+import { cookies, headers, type UnsafeUnwrappedHeaders } from "next/headers";
 import Credentials from "next-auth/providers/credentials";
-import { loadMetadata } from "./main";
+import { loadMetadata } from "@karrio/core/context/main";
 import NextAuth from "next-auth";
 import moment from "moment";
-import { cookies, headers, type UnsafeUnwrappedHeaders } from "next/headers";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
@@ -27,7 +27,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const { metadata } = await loadMetadata();
           const auth = Auth(metadata?.HOST || (KARRIO_API as string));
           const token = await auth.authenticate(credentials as any);
-          const testMode = (headers() as unknown as UnsafeUnwrappedHeaders).get("referer")?.includes("/test");
+          const testMode = (headers() as unknown as UnsafeUnwrappedHeaders)
+            .get("referer")
+            ?.includes("/test");
           const org = metadata?.MULTI_ORGANIZATIONS
             ? await auth.getCurrentOrg(token.access, orgId)
             : { id: null };

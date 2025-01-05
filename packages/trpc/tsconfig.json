@@ -1,0 +1,17 @@
+{
+  "extends": "@karrio/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next",
+      },
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@karrio/trpc/*": ["./*"],
+      "react": ["./node_modules/@types/react"],
+    },
+  },
+  "include": [".", "./**/*.ts", "./**/*.tsx"],
+  "exclude": ["dist", "build", "node_modules"],
+}
