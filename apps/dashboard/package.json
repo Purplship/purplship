@@ -6,10 +6,7 @@
     "dev:oss": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "gen:rest": "cd ..; ./bin/generate-rest-types",
-    "gen:graph": "cd ..; ./bin/generate-graphql-types",
-    "build:image": "cd ..; ./bin/build-dashboard-image"
+    "lint": "next lint"
   },
   "dependencies": {
     "@karrio/core": "*",
@@ -17,7 +14,8 @@
     "@karrio/lib": "*",
     "@karrio/types": "*",
     "@karrio/ui": "*",
-    "next-runtime-env": "^3.2.2"
+    "@karrio/insiders": "*",
+    "@karrio/admin": "*"
   },
   "devDependencies": {
     "eslint": "7.32.0",

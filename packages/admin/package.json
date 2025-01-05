@@ -1,0 +1,21 @@
+{
+  "name": "@karrio/admin",
+  "version": "0.0.0",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@karrio/core": "*",
+    "@karrio/hooks": "*",
+    "@karrio/lib": "*",
+    "@karrio/types": "*",
+    "@karrio/insiders": "*"
+  },
+  "devDependencies": {
+    "@karrio/eslint-config-custom": "*",
+    "@karrio/tsconfig": "*"
+  }
+}
