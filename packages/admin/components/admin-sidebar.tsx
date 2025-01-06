@@ -49,6 +49,7 @@ const menuItems = [
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const basePath = pathname?.split("/admin")[0] || "";
 
   return (
     <div className="sticky top-4 rounded-lg border bg-white shadow-sm">
@@ -65,11 +66,12 @@ export function AdminSidebar() {
         {menuItems.map((item) => (
           <Link
             key={item.label}
-            href={item.href}
+            href={`${basePath}${item.href}`}
             className={cn(
               "flex items-center gap-3 rounded-md px-2 py-2 text-sm text-gray-700 hover:bg-gray-100",
               "focus-visible:bg-gray-100 focus-visible:outline-none",
-              pathname === item.href && "bg-gray-100 font-medium",
+              pathname === `${basePath}${item.href}` &&
+                "bg-gray-100 font-medium",
               item.isDisabled && "pointer-events-none opacity-50",
             )}
           >

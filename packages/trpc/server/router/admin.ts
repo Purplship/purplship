@@ -524,6 +524,9 @@ const systemConnectionsRouter = router({
           test_mode: z.boolean().optional(),
           active: z.boolean().optional(),
           capabilities: z.array(z.string()).optional(),
+          credentials: z.record(z.any()).optional(),
+          config: z.record(z.any()).optional(),
+          metadata: z.record(z.any()).optional(),
         }),
       }),
     )
@@ -546,6 +549,9 @@ const systemConnectionsRouter = router({
           test_mode: z.boolean().optional(),
           active: z.boolean().optional(),
           capabilities: z.array(z.string()).optional(),
+          credentials: z.record(z.any()).optional(),
+          config: z.record(z.any()).optional(),
+          metadata: z.record(z.any()).optional(),
         }),
       }),
     )

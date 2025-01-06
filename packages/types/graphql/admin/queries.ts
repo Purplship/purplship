@@ -14,6 +14,9 @@ export const GET_SYSTEM_CONNECTIONS = gql`
       test_mode
       active
       capabilities
+      credentials
+      config
+      metadata
     }
   }
 `;
@@ -27,6 +30,9 @@ export const GET_SYSTEM_CONNECTION = gql`
       test_mode
       active
       capabilities
+      credentials
+      config
+      metadata
     }
   }
 `;
@@ -45,6 +51,9 @@ export const CREATE_SYSTEM_CONNECTION = gql`
         test_mode
         active
         capabilities
+        credentials
+        config
+        metadata
       }
     }
   }
@@ -64,6 +73,9 @@ export const UPDATE_SYSTEM_CONNECTION = gql`
         test_mode
         active
         capabilities
+        credentials
+        config
+        metadata
       }
     }
   }

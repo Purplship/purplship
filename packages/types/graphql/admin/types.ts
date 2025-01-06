@@ -14,6 +14,9 @@ export interface GetSystemConnections_system_carrier_connections {
   test_mode: boolean;
   active: boolean;
   capabilities: string[];
+  credentials: any;
+  config: any | null;
+  metadata: any | null;
 }
 
 export interface GetSystemConnections {
@@ -35,6 +38,9 @@ export interface GetSystemConnection_system_carrier_connection {
   test_mode: boolean;
   active: boolean;
   capabilities: string[];
+  credentials: any;
+  config: any | null;
+  metadata: any | null;
 }
 
 export interface GetSystemConnection {
@@ -65,6 +71,9 @@ export interface CreateSystemConnection_create_system_carrier_connection_connect
   test_mode: boolean;
   active: boolean;
   capabilities: string[];
+  credentials: any;
+  config: any | null;
+  metadata: any | null;
 }
 
 export interface CreateSystemConnection_create_system_carrier_connection {
@@ -100,6 +109,9 @@ export interface UpdateSystemConnection_update_system_carrier_connection_connect
   test_mode: boolean;
   active: boolean;
   capabilities: string[];
+  credentials: any;
+  config: any | null;
+  metadata: any | null;
 }
 
 export interface UpdateSystemConnection_update_system_carrier_connection {
