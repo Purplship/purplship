@@ -18,6 +18,7 @@ import {
   CREATE_RATE_SHEET,
   UPDATE_RATE_SHEET,
   DELETE_RATE_SHEET,
+  UPDATE_SERVICE_ZONE,
   GET_SYSTEM_CONNECTIONS,
   GET_SYSTEM_CONNECTION,
   CREATE_SYSTEM_CONNECTION,
@@ -52,6 +53,7 @@ import type {
   CreateRateSheet,
   UpdateRateSheet,
   DeleteRateSheet,
+  UpdateServiceZone,
   CreateSystemConnection,
   UpdateSystemConnection,
   DeleteSystemConnection,
@@ -283,7 +285,11 @@ const rateSheetsRouter = router({
   list: protectedProcedure
     .input(
       z.object({
-        filter: z.object({}).optional(),
+        filter: z
+          .object({
+            keyword: z.string().optional(),
+          })
+          .optional(),
       }),
     )
     .query(async ({ ctx, input }) => {
@@ -318,11 +324,11 @@ const rateSheetsRouter = router({
             .array(
               z.object({
                 service_name: z.string(),
-                service_code: z.string().optional(),
+                service_code: z.string(),
                 carrier_service_code: z.string().optional(),
                 description: z.string().optional(),
                 active: z.boolean().optional(),
-                currency: z.string().optional(),
+                currency: z.string(),
                 transit_days: z.number().optional(),
                 transit_time: z.number().optional(),
                 max_width: z.number().optional(),
@@ -333,6 +339,7 @@ const rateSheetsRouter = router({
                 weight_unit: z.string().optional(),
                 domicile: z.boolean().optional(),
                 international: z.boolean().optional(),
+                metadata: z.record(z.any()).optional(),
                 zones: z
                   .array(
                     z.object({
@@ -354,6 +361,7 @@ const rateSheetsRouter = router({
               }),
             )
             .optional(),
+          carriers: z.array(z.string()).optional(),
         }),
       }),
     )
@@ -394,6 +402,7 @@ const rateSheetsRouter = router({
                 weight_unit: z.string().optional(),
                 domicile: z.boolean().optional(),
                 international: z.boolean().optional(),
+                metadata: z.record(z.any()).optional(),
                 zones: z
                   .array(
                     z.object({
@@ -416,6 +425,8 @@ const rateSheetsRouter = router({
               }),
             )
             .optional(),
+          carriers: z.array(z.string()).optional(),
+          remove_missing_services: z.boolean().optional(),
         }),
       }),
     )
@@ -428,6 +439,41 @@ const rateSheetsRouter = router({
         },
       );
       return update_rate_sheet;
+    }),
+  update_service_zone: protectedProcedure
+    .input(
+      z.object({
+        data: z.object({
+          id: z.string(),
+          service_id: z.string(),
+          zone_index: z.number(),
+          zone: z.object({
+            rate: z.number().optional(),
+            label: z.string().optional(),
+            min_weight: z.number().optional(),
+            max_weight: z.number().optional(),
+            transit_days: z.number().optional(),
+            transit_time: z.number().optional(),
+            radius: z.number().optional(),
+            latitude: z.number().optional(),
+            longitude: z.number().optional(),
+            cities: z.array(z.string()).optional(),
+            postal_codes: z.array(z.string()).optional(),
+            country_codes: z.array(z.string()).optional(),
+          }),
+        }),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const client = ctx.karrio;
+      const { update_service_zone } =
+        await client.admin.request<UpdateServiceZone>(
+          gqlstr(UPDATE_SERVICE_ZONE),
+          {
+            data: input.data,
+          },
+        );
+      return update_service_zone;
     }),
   delete: protectedProcedure
     .input(

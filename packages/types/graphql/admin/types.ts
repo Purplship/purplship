@@ -60,6 +60,11 @@ export interface CreateSystemConnection_create_system_carrier_connection_errors 
 
 export interface CreateSystemConnection_create_system_carrier_connection_connection {
   id: string;
+  carrier_name: string;
+  display_name: string;
+  test_mode: boolean;
+  active: boolean;
+  capabilities: string[];
 }
 
 export interface CreateSystemConnection_create_system_carrier_connection {
@@ -90,6 +95,11 @@ export interface UpdateSystemConnection_update_system_carrier_connection_errors 
 
 export interface UpdateSystemConnection_update_system_carrier_connection_connection {
   id: string;
+  carrier_name: string;
+  display_name: string;
+  test_mode: boolean;
+  active: boolean;
+  capabilities: string[];
 }
 
 export interface UpdateSystemConnection_update_system_carrier_connection {
@@ -609,13 +619,26 @@ export interface GetRateSheet_rate_sheet_services {
   zones: GetRateSheet_rate_sheet_services_zones[];
 }
 
+export interface GetRateSheet_rate_sheet_carriers {
+  id: string;
+  carrier_id: string;
+  carrier_name: string;
+  display_name: string;
+  active: boolean;
+  is_system: boolean;
+  test_mode: boolean;
+  capabilities: string[];
+}
+
 export interface GetRateSheet_rate_sheet {
   id: string;
   name: string;
   slug: string;
   carrier_name: CarrierNameEnum;
   object_type: string;
+  metadata: any | null;
   services: GetRateSheet_rate_sheet_services[];
+  carriers: GetRateSheet_rate_sheet_carriers[];
 }
 
 export interface GetRateSheet {
@@ -637,6 +660,21 @@ export interface GetRateSheetVariables {
 export interface GetRateSheets_rate_sheets_edges_node_services {
   id: string;
   service_name: string | null;
+  service_code: string | null;
+  carrier_service_code: string | null;
+  description: string | null;
+  active: boolean | null;
+}
+
+export interface GetRateSheets_rate_sheets_edges_node_carriers {
+  id: string;
+  carrier_id: string;
+  carrier_name: string;
+  display_name: string;
+  active: boolean;
+  is_system: boolean;
+  test_mode: boolean;
+  capabilities: string[];
 }
 
 export interface GetRateSheets_rate_sheets_edges_node {
@@ -645,7 +683,9 @@ export interface GetRateSheets_rate_sheets_edges_node {
   slug: string;
   carrier_name: CarrierNameEnum;
   object_type: string;
+  metadata: any | null;
   services: GetRateSheets_rate_sheets_edges_node_services[];
+  carriers: GetRateSheets_rate_sheets_edges_node_carriers[];
 }
 
 export interface GetRateSheets_rate_sheets_edges {
@@ -658,6 +698,10 @@ export interface GetRateSheets_rate_sheets {
 
 export interface GetRateSheets {
   rate_sheets: GetRateSheets_rate_sheets;
+}
+
+export interface GetRateSheetsVariables {
+  filter?: RateSheetFilter | null;
 }
 
 
@@ -673,9 +717,40 @@ export interface CreateRateSheet_create_rate_sheet_errors {
   messages: string[];
 }
 
+export interface CreateRateSheet_create_rate_sheet_rate_sheet_services_zones {
+  label: string | null;
+  rate: number | null;
+  min_weight: number | null;
+  max_weight: number | null;
+  transit_days: number | null;
+  transit_time: number | null;
+  radius: number | null;
+  latitude: number | null;
+  longitude: number | null;
+  cities: string[] | null;
+  postal_codes: string[] | null;
+  country_codes: CountryCodeEnum[] | null;
+}
+
 export interface CreateRateSheet_create_rate_sheet_rate_sheet_services {
   id: string;
   service_name: string | null;
+  service_code: string | null;
+  carrier_service_code: string | null;
+  description: string | null;
+  active: boolean | null;
+  zones: CreateRateSheet_create_rate_sheet_rate_sheet_services_zones[];
+}
+
+export interface CreateRateSheet_create_rate_sheet_rate_sheet_carriers {
+  id: string;
+  carrier_id: string;
+  carrier_name: string;
+  display_name: string;
+  active: boolean;
+  is_system: boolean;
+  test_mode: boolean;
+  capabilities: string[];
 }
 
 export interface CreateRateSheet_create_rate_sheet_rate_sheet {
@@ -684,7 +759,9 @@ export interface CreateRateSheet_create_rate_sheet_rate_sheet {
   slug: string;
   carrier_name: CarrierNameEnum;
   object_type: string;
+  metadata: any | null;
   services: CreateRateSheet_create_rate_sheet_rate_sheet_services[];
+  carriers: CreateRateSheet_create_rate_sheet_rate_sheet_carriers[];
 }
 
 export interface CreateRateSheet_create_rate_sheet {
@@ -713,9 +790,40 @@ export interface UpdateRateSheet_update_rate_sheet_errors {
   messages: string[];
 }
 
+export interface UpdateRateSheet_update_rate_sheet_rate_sheet_services_zones {
+  label: string | null;
+  rate: number | null;
+  min_weight: number | null;
+  max_weight: number | null;
+  transit_days: number | null;
+  transit_time: number | null;
+  radius: number | null;
+  latitude: number | null;
+  longitude: number | null;
+  cities: string[] | null;
+  postal_codes: string[] | null;
+  country_codes: CountryCodeEnum[] | null;
+}
+
 export interface UpdateRateSheet_update_rate_sheet_rate_sheet_services {
   id: string;
   service_name: string | null;
+  service_code: string | null;
+  carrier_service_code: string | null;
+  description: string | null;
+  active: boolean | null;
+  zones: UpdateRateSheet_update_rate_sheet_rate_sheet_services_zones[];
+}
+
+export interface UpdateRateSheet_update_rate_sheet_rate_sheet_carriers {
+  id: string;
+  carrier_id: string;
+  carrier_name: string;
+  display_name: string;
+  active: boolean;
+  is_system: boolean;
+  test_mode: boolean;
+  capabilities: string[];
 }
 
 export interface UpdateRateSheet_update_rate_sheet_rate_sheet {
@@ -724,7 +832,9 @@ export interface UpdateRateSheet_update_rate_sheet_rate_sheet {
   slug: string;
   carrier_name: CarrierNameEnum;
   object_type: string;
+  metadata: any | null;
   services: UpdateRateSheet_update_rate_sheet_rate_sheet_services[];
+  carriers: UpdateRateSheet_update_rate_sheet_rate_sheet_carriers[];
 }
 
 export interface UpdateRateSheet_update_rate_sheet {
@@ -738,6 +848,57 @@ export interface UpdateRateSheet {
 
 export interface UpdateRateSheetVariables {
   data: UpdateRateSheetMutationInput;
+}
+
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateServiceZone
+// ====================================================
+
+export interface UpdateServiceZone_update_service_zone_errors {
+  field: string;
+  messages: string[];
+}
+
+export interface UpdateServiceZone_update_service_zone_rate_sheet_services_zones {
+  label: string | null;
+  rate: number | null;
+  min_weight: number | null;
+  max_weight: number | null;
+  transit_days: number | null;
+  transit_time: number | null;
+  radius: number | null;
+  latitude: number | null;
+  longitude: number | null;
+  cities: string[] | null;
+  postal_codes: string[] | null;
+  country_codes: CountryCodeEnum[] | null;
+}
+
+export interface UpdateServiceZone_update_service_zone_rate_sheet_services {
+  id: string;
+  zones: UpdateServiceZone_update_service_zone_rate_sheet_services_zones[];
+}
+
+export interface UpdateServiceZone_update_service_zone_rate_sheet {
+  id: string;
+  services: UpdateServiceZone_update_service_zone_rate_sheet_services[];
+}
+
+export interface UpdateServiceZone_update_service_zone {
+  errors: UpdateServiceZone_update_service_zone_errors[] | null;
+  rate_sheet: UpdateServiceZone_update_service_zone_rate_sheet | null;
+}
+
+export interface UpdateServiceZone {
+  update_service_zone: UpdateServiceZone_update_service_zone;
+}
+
+export interface UpdateServiceZoneVariables {
+  data: UpdateServiceZoneMutationInput;
 }
 
 
@@ -1534,6 +1695,13 @@ export interface DeleteMutationInput {
 }
 
 // null
+export interface RateSheetFilter {
+  offset?: number | null;
+  first?: number | null;
+  keyword?: string | null;
+}
+
+// null
 export interface CreateRateSheetMutationInput {
   name: string;
   carrier_name: CarrierNameEnum;
@@ -1586,6 +1754,7 @@ export interface UpdateRateSheetMutationInput {
   name?: string | null;
   services?: UpdateServiceLevelInput[] | null;
   carriers?: string[] | null;
+  remove_missing_services?: boolean | null;
 }
 
 // null
@@ -1626,6 +1795,14 @@ export interface UpdateServiceZoneInput {
   cities?: string[] | null;
   postal_codes?: string[] | null;
   country_codes?: string[] | null;
+}
+
+// null
+export interface UpdateServiceZoneMutationInput {
+  id: string;
+  service_id: string;
+  zone_index: number;
+  zone: UpdateServiceZoneInput;
 }
 
 // null

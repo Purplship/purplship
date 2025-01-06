@@ -1,7 +1,7 @@
+import strawberry
 import typing
 import logging
 import datetime
-import strawberry
 from strawberry.types import Info
 from rest_framework import exceptions
 from django.utils.http import urlsafe_base64_decode
@@ -539,9 +539,7 @@ class CreateRateSheetMutation(utils.BaseMutation):
                 _.settings.rate_sheet = rate_sheet
                 _.settings.save(update_fields=["rate_sheet"])
 
-        return CreateRateSheetMutation(
-            rate_sheet=providers.RateSheet.objects.get(id=input["id"])
-        )
+        return CreateRateSheetMutation(rate_sheet=rate_sheet)
 
 
 @strawberry.type
@@ -555,41 +553,18 @@ class UpdateRateSheetMutation(utils.BaseMutation):
     def mutate(
         info: Info, **input: inputs.UpdateRateSheetMutationInput
     ) -> "UpdateRateSheetMutation":
-        data = input.copy()
-        carriers = data.pop("carriers", []) if "carriers" in data else None
         instance = providers.RateSheet.access_by(info.context.request).get(
             id=input["id"]
         )
         serializer = serializers.RateSheetModelSerializer(
             instance,
-            data=data,
+            data=input,
             context=info.context.request,
             partial=True,
         )
 
         serializer.is_valid(raise_exception=True)
         rate_sheet = serializer.save()
-
-        if "services" in data:
-            save_many_to_many_data(
-                "services",
-                serializers.ServiceLevelModelSerializer,
-                instance,
-                payload=data,
-                context=info.context.request,
-                remove_if_missing=True,
-            )
-
-        if carriers is not None:
-            _ids = set([*carriers, *(rate_sheet.carriers.values_list("id", flat=True))])
-            _carriers = gateway.Carriers.list(
-                context=info.context.request,
-                carrier_name=rate_sheet.carrier_name,
-            ).filter(id__in=list(_ids))
-
-            for _ in _carriers:
-                _.settings.rate_sheet = rate_sheet if _.id in carriers else None
-                _.settings.save(update_fields=["rate_sheet"])
 
         return UpdateRateSheetMutation(
             rate_sheet=providers.RateSheet.objects.get(id=input["id"])
@@ -825,3 +800,28 @@ class SystemCarrierMutation(utils.BaseMutation):
         return SystemCarrierMutation(
             carrier=providers.Carrier.system_carriers.get(pk=pk)
         )  # type: ignore
+
+
+@strawberry.type
+class UpdateServiceZoneMutation(utils.BaseMutation):
+    rate_sheet: typing.Optional[types.RateSheetType] = None
+
+    @staticmethod
+    @transaction.atomic
+    @utils.authentication_required
+    @utils.authorization_required(["manage_carriers"])
+    def mutate(
+        info: Info, **input: inputs.UpdateServiceZoneMutationInput
+    ) -> "UpdateServiceZoneMutation":
+        rate_sheet = providers.RateSheet.access_by(info.context.request).get(
+            id=input["id"]
+        )
+        service = rate_sheet.services.get(id=input["service_id"])
+
+        serializer = serializers.ServiceLevelModelSerializer(
+            service,
+            context=info.context.request,
+        )
+        serializer.update_zone(input["zone_index"], input["zone"])
+
+        return UpdateServiceZoneMutation(rate_sheet=rate_sheet)  # type:ignore

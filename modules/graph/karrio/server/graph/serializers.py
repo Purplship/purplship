@@ -1,6 +1,9 @@
 import typing
+import strawberry
 from django.db import transaction
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
+from rest_framework import exceptions
 
 import karrio.server.serializers as serializers
 import karrio.server.core.validators as validators
@@ -252,6 +255,46 @@ class ServiceLevelModelSerializer(serializers.ModelSerializer):
         exclude = ["created_at", "updated_at", "created_by"]
         extra_kwargs = {field: {"read_only": True} for field in ["id"]}
 
+    def update_zone(self, zone_index: int, zone_data: dict) -> None:
+        """Update a specific zone in the service level."""
+        if zone_index >= len(self.instance.zones):
+            raise exceptions.ValidationError(
+                _(f"Zone index {zone_index} is out of range"),
+                code="invalid_zone_index",
+            )
+
+        self.instance.zones[zone_index].update(
+            {k: v for k, v in zone_data.items() if v != strawberry.UNSET}
+        )
+        self.instance.save(update_fields=["zones"])
+
+    def update(self, instance, validated_data):
+        """Handle partial updates of service level data including zones."""
+        zones_data = validated_data.pop("zones", None)
+        instance = super().update(instance, validated_data)
+
+        if zones_data is not None:
+            # Handle zone updates if provided
+            existing_zones = instance.zones or []
+            updated_zones = []
+
+            for idx, zone_data in enumerate(zones_data):
+                if idx < len(existing_zones):
+                    # Update existing zone
+                    zone = existing_zones[idx].copy()
+                    zone.update(
+                        {k: v for k, v in zone_data.items() if v != strawberry.UNSET}
+                    )
+                    updated_zones.append(zone)
+                else:
+                    # Add new zone
+                    updated_zones.append(zone_data)
+
+            instance.zones = updated_zones
+            instance.save(update_fields=["zones"])
+
+        return instance
+
 
 @serializers.owned_model_serializer
 class LabelTemplateModelSerializer(serializers.ModelSerializer):
@@ -269,3 +312,77 @@ class RateSheetModelSerializer(serializers.ModelSerializer):
         model = providers.RateSheet
         exclude = ["created_at", "updated_at", "created_by"]
         extra_kwargs = {field: {"read_only": True} for field in ["id", "services"]}
+
+    def update_services(
+        self, services_data: list, remove_missing: bool = False
+    ) -> None:
+        """Update services of the rate sheet."""
+        existing_services = {s.id: s for s in self.instance.services.all()}
+
+        for service_data in services_data:
+            service_id = service_data.get("id")
+            if service_id and service_id in existing_services:
+                # Update existing service
+                service = existing_services[service_id]
+                service_serializer = ServiceLevelModelSerializer(
+                    service,
+                    data=service_data,
+                    context=self.context,
+                    partial=True,
+                )
+                service_serializer.is_valid(raise_exception=True)
+                service_serializer.save()
+            else:
+                # Create new service
+                service_serializer = ServiceLevelModelSerializer(
+                    data=service_data,
+                    context=self.context,
+                )
+                service_serializer.is_valid(raise_exception=True)
+                service = service_serializer.save()
+                self.instance.services.add(service)
+
+        # Remove services that are not in the update
+        if remove_missing:
+            service_ids = {s.get("id") for s in services_data if "id" in s}
+            for service in existing_services.values():
+                if service.id not in service_ids:
+                    self.instance.services.remove(service)
+                    service.delete()
+
+    def update_carriers(self, carriers: list) -> None:
+        """Update carrier associations."""
+        if carriers is not None:
+            _ids = set(
+                [*carriers, *(self.instance.carriers.values_list("id", flat=True))]
+            )
+            _carriers = gateway.Carriers.list(
+                context=self.context,
+                carrier_name=self.instance.carrier_name,
+            ).filter(id__in=list(_ids))
+
+            for carrier in _carriers:
+                carrier.settings.rate_sheet = (
+                    self.instance if carrier.id in carriers else None
+                )
+                carrier.settings.save(update_fields=["rate_sheet"])
+
+    def update(self, instance, validated_data, **kwargs):
+        """Handle updates of rate sheet data including services and carriers."""
+        services_data = validated_data.pop("services", None)
+        carriers = (
+            validated_data.pop("carriers", None)
+            if "carriers" in validated_data
+            else None
+        )
+        remove_missing_services = validated_data.pop("remove_missing_services", False)
+
+        instance = super().update(instance, validated_data)
+
+        if services_data is not None:
+            self.update_services(services_data, remove_missing_services)
+
+        if carriers is not None:
+            self.update_carriers(carriers)
+
+        return instance

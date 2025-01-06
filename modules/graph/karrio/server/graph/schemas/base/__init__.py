@@ -340,3 +340,9 @@ class Mutation:
         return mutations.DeleteMutation.mutate(
             info, model=core.Metafield, **input.to_dict()
         )
+
+    @strawberry.mutation
+    def update_service_zone(
+        self, info: Info, input: inputs.UpdateServiceZoneMutationInput
+    ) -> mutations.UpdateServiceZoneMutation:
+        return mutations.UpdateServiceZoneMutation.mutate(info, **input.to_dict())

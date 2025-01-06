@@ -428,8 +428,31 @@ class ServiceZoneInput(utils.BaseInput):
 
 
 @strawberry.input
-class UpdateServiceZoneInput(ServiceZoneInput):
+class UpdateServiceZoneInput(utils.BaseInput):
     rate: typing.Optional[float] = strawberry.UNSET
+    label: typing.Optional[str] = strawberry.UNSET
+
+    min_weight: typing.Optional[float] = strawberry.UNSET
+    max_weight: typing.Optional[float] = strawberry.UNSET
+
+    transit_days: typing.Optional[int] = strawberry.UNSET
+    transit_time: typing.Optional[float] = strawberry.UNSET
+
+    radius: typing.Optional[float] = strawberry.UNSET
+    latitude: typing.Optional[float] = strawberry.UNSET
+    longitude: typing.Optional[float] = strawberry.UNSET
+
+    cities: typing.Optional[typing.List[str]] = strawberry.UNSET
+    postal_codes: typing.Optional[typing.List[str]] = strawberry.UNSET
+    country_codes: typing.Optional[typing.List[str]] = strawberry.UNSET
+
+
+@strawberry.input
+class UpdateServiceZoneMutationInput(utils.BaseInput):
+    id: str
+    service_id: str
+    zone_index: int
+    zone: UpdateServiceZoneInput
 
 
 @strawberry.input
@@ -484,6 +507,7 @@ class UpdateRateSheetMutationInput(utils.BaseInput):
     name: typing.Optional[str] = strawberry.UNSET
     services: typing.Optional[typing.List[UpdateServiceLevelInput]] = strawberry.UNSET
     carriers: typing.Optional[typing.List[str]] = strawberry.UNSET
+    remove_missing_services: typing.Optional[bool] = strawberry.UNSET
 
 
 @strawberry.input

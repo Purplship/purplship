@@ -40,6 +40,11 @@ export const CREATE_SYSTEM_CONNECTION = gql`
       }
       connection {
         id
+        carrier_name
+        display_name
+        test_mode
+        active
+        capabilities
       }
     }
   }
@@ -54,6 +59,11 @@ export const UPDATE_SYSTEM_CONNECTION = gql`
       }
       connection {
         id
+        carrier_name
+        display_name
+        test_mode
+        active
+        capabilities
       }
     }
   }
@@ -358,6 +368,7 @@ export const GET_RATE_SHEET = gql`
       slug
       carrier_name
       object_type
+      metadata
       services {
         id
         object_type
@@ -394,13 +405,23 @@ export const GET_RATE_SHEET = gql`
           country_codes
         }
       }
+      carriers {
+        id
+        carrier_id
+        carrier_name
+        display_name
+        active
+        is_system
+        test_mode
+        capabilities
+      }
     }
   }
 `;
 
 export const GET_RATE_SHEETS = gql`
-  query GetRateSheets {
-    rate_sheets {
+  query GetRateSheets($filter: RateSheetFilter) {
+    rate_sheets(filter: $filter) {
       edges {
         node {
           id
@@ -408,9 +429,24 @@ export const GET_RATE_SHEETS = gql`
           slug
           carrier_name
           object_type
+          metadata
           services {
             id
             service_name
+            service_code
+            carrier_service_code
+            description
+            active
+          }
+          carriers {
+            id
+            carrier_id
+            carrier_name
+            display_name
+            active
+            is_system
+            test_mode
+            capabilities
           }
         }
       }
@@ -431,9 +467,38 @@ export const CREATE_RATE_SHEET = gql`
         slug
         carrier_name
         object_type
+        metadata
         services {
           id
           service_name
+          service_code
+          carrier_service_code
+          description
+          active
+          zones {
+            label
+            rate
+            min_weight
+            max_weight
+            transit_days
+            transit_time
+            radius
+            latitude
+            longitude
+            cities
+            postal_codes
+            country_codes
+          }
+        }
+        carriers {
+          id
+          carrier_id
+          carrier_name
+          display_name
+          active
+          is_system
+          test_mode
+          capabilities
         }
       }
     }
@@ -453,9 +518,69 @@ export const UPDATE_RATE_SHEET = gql`
         slug
         carrier_name
         object_type
+        metadata
         services {
           id
           service_name
+          service_code
+          carrier_service_code
+          description
+          active
+          zones {
+            label
+            rate
+            min_weight
+            max_weight
+            transit_days
+            transit_time
+            radius
+            latitude
+            longitude
+            cities
+            postal_codes
+            country_codes
+          }
+        }
+        carriers {
+          id
+          carrier_id
+          carrier_name
+          display_name
+          active
+          is_system
+          test_mode
+          capabilities
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_SERVICE_ZONE = gql`
+  mutation UpdateServiceZone($data: UpdateServiceZoneMutationInput!) {
+    update_service_zone(input: $data) {
+      errors {
+        field
+        messages
+      }
+      rate_sheet {
+        id
+        services {
+          id
+          zones {
+            label
+            rate
+            min_weight
+            max_weight
+            transit_days
+            transit_time
+            radius
+            latitude
+            longitude
+            cities
+            postal_codes
+            country_codes
+          }
         }
       }
     }
