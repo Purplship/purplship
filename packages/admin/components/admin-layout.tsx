@@ -53,10 +53,12 @@ export default async function Layout({ children }: AdminLayoutProps) {
         <div className="min-h-screen bg-[#f6f6f7] pt-14">
           <div className="p-4">
             <div className="relative mx-auto max-w-[1200px]">
-              <div className="grid grid-cols-[280px,1fr] gap-5">
-                <AdminSidebar />
+              <div className="flex gap-5">
+                <div className="w-[280px] shrink-0">
+                  <AdminSidebar />
+                </div>
 
-                <div className="space-y-6">{children}</div>
+                <main className="flex-1 space-y-6">{children}</main>
               </div>
             </div>
           </div>

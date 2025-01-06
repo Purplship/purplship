@@ -10,14 +10,6 @@ export const createContext = async () => {
   const session = (await auth()) as Session | any | null;
   const { metadata } = await loadMetadata();
 
-  console.log(session, {
-    ...(session?.orgId ? { "x-org-id": session.orgId } : {}),
-    ...(session?.testMode ? { "x-test-mode": session.testMode } : {}),
-    ...(session?.accessToken
-      ? { Authorization: `Bearer ${session.accessToken}` }
-      : {}),
-  });
-
   return {
     session: session,
     user: session?.user,
