@@ -308,6 +308,19 @@ exec:      Execute command in docker dev environment.
 ./bin/docker-env exec 'python -m unittest discover -v -f modules/connectors/dhl_express/tests'
 ```
 
+### Build your own deployment(image) for specific carrier extensions
+
+If you need to build your own deployment for specific carrier extensions, you can follow the steps below.
+
+- Update the source.requirements.txt file with the carrier extensions you need, similar to requirements.sdk.dev.txt.
+- Build the docker image with the following command:
+
+```terminal title="Terminal"
+./bin/build-server-image-from-source <tag>
+```
+
+- Update the docker-compose.yml file to use the new image you just built.
+
 :::
 
 ## Troubleshooting
