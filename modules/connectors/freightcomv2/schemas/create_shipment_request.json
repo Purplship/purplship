@@ -1,0 +1,236 @@
+{
+  "unique_id": "string",
+  "payment_method_id": "string",
+  "service_id": "string",
+  "details": {
+    "origin": {
+      "name": "Philip J Fry",
+      "address": {
+        "address_line_1": "200 University Avenue West",
+        "address_line_2": "string",
+        "unit_number": "42a",
+        "city": "Waterloo",
+        "region": "ON",
+        "country": "CA",
+        "postal_code": "string"
+      },
+      "residential": true,
+      "tailgate_required": true,
+      "instructions": "string",
+      "contact_name": "string",
+      "phone_number": {
+        "number": "5554447777",
+        "extension": "123"
+      },
+      "email_addresses": [
+        "user@example.com"
+      ],
+      "receives_email_updates": true
+    },
+    "destination": {
+      "name": "Philip J Fry",
+      "address": {
+        "address_line_1": "200 University Avenue West",
+        "address_line_2": "string",
+        "unit_number": "42a",
+        "city": "Waterloo",
+        "region": "ON",
+        "country": "CA",
+        "postal_code": "string"
+      },
+      "residential": true,
+      "tailgate_required": true,
+      "instructions": "string",
+      "contact_name": "string",
+      "phone_number": {
+        "number": "5554447777",
+        "extension": "123"
+      },
+      "email_addresses": [
+        "user@example.com"
+      ],
+      "receives_email_updates": true,
+      "ready_at": {
+        "hour": 15,
+        "minute": 6
+      },
+      "ready_until": {
+        "hour": 15,
+        "minute": 6
+      },
+      "signature_requirement": "not-required"
+    },
+    "expected_ship_date": {
+      "year": 2006,
+      "month": 6,
+      "day": 7
+    },
+    "packaging_type": "pallet",
+    "packaging_properties": {
+      "pallet_type": "ltl",
+      "has_stackable_pallets": true,
+      "dangerous_goods": "limited-quantity",
+      "dangerous_goods_details": {
+        "packaging_group": "string",
+        "goods_class": "string",
+        "description": "string",
+        "united_nations_number": "string",
+        "emergency_contact_name": "string",
+        "emergency_contact_phone_number": {
+          "number": "5554447777",
+          "extension": "123"
+        }
+      },
+      "pallets": [
+        {
+          "measurements": {
+            "weight": {
+              "unit": "lb",
+              "value": 2.95
+            },
+            "cuboid": {
+              "unit": "ft",
+              "l": 5,
+              "w": 5,
+              "h": 5
+            }
+          },
+          "description": "string",
+          "freight_class": "string",
+          "nmfc": "string",
+          "contents_type": "string",
+          "num_pieces": 0
+        }
+      ],
+      "pallet_service_details": {
+        "limited_access_delivery_type": "construction-site",
+        "limited_access_delivery_other_name": "string",
+        "in_bond": true,
+        "in_bond_details": {
+          "type": "immediate-exportation",
+          "name": "string",
+          "address": "string",
+          "contact_method": "email-address",
+          "contact_email_address": "string",
+          "contact_phone_number": {
+            "number": "5554447777",
+            "extension": "123"
+          }
+        },
+        "appointment_delivery": true,
+        "protect_from_freeze": true,
+        "threshold_pickup": true,
+        "threshold_delivery": true
+      }
+    },
+    "insurance": {
+      "type": "internal",
+      "total_cost": {
+        "currency": "CAD",
+        "value": "4250"
+      }
+    },
+    "reference_codes": [
+      "string"
+    ]
+  },
+  "customs_invoice": {
+    "source": "details",
+    "broker": {
+      "use_carrier": true,
+      "name": "string",
+      "account_number": "string",
+      "phone_number": {
+        "number": "5554447777",
+        "extension": "123"
+      },
+      "fax_number": {
+        "number": "5554447777",
+        "extension": "123"
+      },
+      "email_address": "string",
+      "usmca_number": "string",
+      "fda_number": "string"
+    },
+    "details": {
+      "tax_recipient": {
+        "type": "shipper",
+        "shipper_tax_identifier": "string",
+        "receiver_tax_identifier": "string",
+        "third_party_tax_identifier": "string",
+        "other_tax_identifier": "string",
+        "name": "string",
+        "address": {
+          "address_line_1": "200 University Avenue West",
+          "address_line_2": "string",
+          "unit_number": "42a",
+          "city": "Waterloo",
+          "region": "ON",
+          "country": "CA",
+          "postal_code": "string"
+        },
+        "phone_number": {
+          "number": "5554447777",
+          "extension": "123"
+        },
+        "reason_for_export": "gift",
+        "additional_remarks": "string",
+        "comments": "string"
+      },
+      "products": [
+        {
+          "product_name": "string",
+          "weight": {
+            "unit": "lb",
+            "value": 2.95
+          },
+          "hs_code": "string",
+          "country_of_origin": "CA",
+          "num_units": 1,
+          "unit_price": {
+            "currency": "CAD",
+            "value": "4250"
+          },
+          "description": "string"
+        }
+      ]
+    }
+  },
+  "pickup_details": {
+    "pre_scheduled_pickup": true,
+    "date": {
+      "year": 2006,
+      "month": 6,
+      "day": 7
+    },
+    "ready_at": {
+      "hour": 15,
+      "minute": 6
+    },
+    "ready_until": {
+      "hour": 15,
+      "minute": 6
+    },
+    "pickup_location": "string",
+    "contact_name": "string",
+    "contact_phone_number": {
+      "number": "5554447777",
+      "extension": "123"
+    }
+  },
+  "dispatch_details": {
+    "date": {
+      "year": 2006,
+      "month": 6,
+      "day": 7
+    },
+    "ready_at": {
+      "hour": 15,
+      "minute": 6
+    },
+    "ready_until": {
+      "hour": 15,
+      "minute": 6
+    }
+  }
+}

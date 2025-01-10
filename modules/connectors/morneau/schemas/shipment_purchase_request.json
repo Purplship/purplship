@@ -1,0 +1,118 @@
+{
+  "ServiceLevel": "Regular",
+  "Stops": {
+    "Loads": [
+      {
+        "Company": {
+          "Name": "RADIANT",
+          "Address": {
+            "Address1": "3520 LAIRD RD",
+            "Address2": "COPK STORLOC - 7477",
+            "PostalCode": "L5L5Z7",
+            "City": "MISSISSAUGA",
+            "ProvinceCode": "CA_ON"
+          },
+          "EmergencyContact": {
+            "FaxNumber": 0,
+            "CellPhoneNumber": 0,
+            "PhoneNumber": 0,
+            "PhoneNumberExtension": 0,
+            "ContactName": "string",
+            "Email": "string"
+          },
+          "IsInvoicee": false
+        },
+        "ExpectedArrivalTimeSlot": {
+          "Between": "2023-12-12T21:14:05.3502621Z",
+          "And": "2023-12-12T21:14:05.3502621Z"
+        },
+        "Commodities": []
+      }
+    ],
+    "Unloads": [
+      {
+        "Number": 1,
+        "Company": {
+          "Name": "AUX GIGANTESQUES PAS",
+          "Address": {
+            "Address1": "412 RUE DU PARC",
+            "Address2": "",
+            "PostalCode": "J7R7G6",
+            "City": "SAINT EUSTACHE",
+            "ProvinceCode": "CA_QC"
+          },
+          "EmergencyContact": {
+            "FaxNumber": 0,
+            "CellPhoneNumber": 0,
+            "PhoneNumber": 0,
+            "PhoneNumberExtension": 0,
+            "ContactName": "contact 1",
+            "Email": "string"
+          },
+          "IsInvoicee": false
+        },
+        "ExpectedArrivalTimeSlot": {
+          "Between": "2023-12-12T21:14:05.3502621Z",
+          "And": "2023-12-12T21:14:05.3502621Z"
+        },
+        "Commodities": [
+          {
+            "Code": "CHAU"
+          },
+          {
+            "Code": "TAILGATE"
+          }
+        ],
+        "SpecialInstructions": "This is a special instruction for this unload",
+        "FloorPallets": {
+          "Quantity": 0
+        },
+        "Freight": [
+          {
+            "Description": "FAK",
+            "ClassCode": "string",
+            "Weight": {
+              "Quantity": 160,
+              "Unit": "Pound"
+            },
+            "Unit": "Pallets",
+            "Quantity": 1,
+            "PurchaseOrderNumbers": [
+              "PO1"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Notes": "this is the note",
+  "ShipmentIdentifier": {
+    "Type": "ProBill",
+    "Number": "TheSID01"
+  },
+  "References": [
+    {
+      "Type": "ProBill",
+      "Value": "2712138"
+    }
+  ],
+  "ThirdPartyInvoicee": {
+    "Name": "RADIANT GLOBAL LOGISTICS (CANADA) INC.",
+    "Address": {
+      "Address1": "1280 COURTNEYPARK DR E.",
+      "Address2": "",
+      "PostalCode": "L5T1N6",
+      "City": "MISSISSAUGA",
+      "ProvinceCode": "CA_ON"
+    },
+    "EmergencyContact": {
+      "FaxNumber": 0,
+      "CellPhoneNumber": 0,
+      "PhoneNumber": 9056022700,
+      "PhoneNumberExtension": 0,
+      "ContactName": "SUPER",
+      "Email": "radiant@groupemorneau.com"
+    },
+    "IsInvoicee": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "type": "label-created",
+      "when": "string",
+      "where": {
+        "city": "string",
+        "region": "string",
+        "country": "string"
+      },
+      "message": "string"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "DetailLineId": 12933572,
+  "QuoteNumber": "Q829200",
+  "ValidFrom": "2023-12-11T00:00:00-05:00",
+  "ValidTo": "2024-01-11T00:00:00-05:00",
+  "Charges": 72.8,
+  "XCharges": 123.3,
+  "ProtectedCharges": 0.0,
+  "Tps": 9.81,
+  "Tvq": 19.56,
+  "TotalCharges": 225.47,
+  "IsSucessfull": true,
+  "AccessorialCharges": {
+    "Charges": [
+      {
+        "Id": "SC",
+        "Amount": 23.3,
+        "Description": "SURC. CARB./FUEL SURC.      "
+      },
+      {
+        "Id": "RENDEZVOUS",
+        "Amount": 50.0,
+        "Description": "RENDEZ-VOUS / APPOINTMENT"
+      },
+      {
+        "Id": "HOME",
+        "Amount": 50.0,
+        "Description": "MAISON PRIVEE / RESIDENTIAL P/U OR DELIV"
+      }
+    ],
+    "TotalAmount": 123.3
+  },
+  "EndZone": "H1L 4M3",
+  "EndCity": null,
+  "StartZone": "J8Z 1V8",
+  "StartCity": null,
+  "NbPallet": 1,
+  "NbPalletPlancher": 0,
+  "NbPieces": 0,
+  "PiecesUnit": 0,
+  "WeightUnit": 0,
+  "RawWeightUnit": "0",
+  "RawPiecesUnit": "PCS",
+  "Weight": 110.0,
+  "BillToCode": "0000005461",
+  "UserName": "TEST.USER",
+  "Commodities": [
+    "DESC",
+    "RENDEZVOUS",
+    "PCAMLIVR",
+    "HOME"
+  ],
+  "Dimensions": []
+}

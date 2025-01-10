@@ -7,5 +7,6 @@ RUN apt-get update -y && apt-get install -y gcc libpango1.0-0 libpangoft2-1.0-0 
 WORKDIR /karrio
 ENV PATH="/karrio/.venv/karrio/bin:$PATH"
 EXPOSE 5002
+EXPOSE 3000
 
 ENV PORT 5002

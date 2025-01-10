@@ -1,0 +1,25 @@
+{
+  "BillToCodeId": 18691,
+  "Division": "Morneau",
+  "Quote": {
+    "StartZone": "J8Z 1V8",
+    "EndZone": "H1L 4M3",
+    "UserName": "test.user",
+    "NbPallet": 1,
+    "Weight": 110,
+    "WeightUnit": "LB",
+    "Commodities": [
+      "RENDEZVOUS",
+      "PCAMLIVR",
+      "HOME"
+    ],
+    "Dimensions": [
+      {
+        "Piece": 1,
+        "Length": 21,
+        "Width": 40,
+        "Height": 26
+      }
+    ]
+  }
+}

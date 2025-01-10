@@ -1,0 +1,21 @@
+{
+  "ShipmentIdentifier": "00108366",
+  "LoadTenderConfirmations": [
+    {
+      "FreightBillNumber": "A10480018",
+      "IsAccepted": true,
+      "Status": "New",
+      "PurchaseOrderNumbers": [],
+      "References": [
+        {
+          "Type": "Consignee",
+          "Value": "226675"
+        },
+        {
+          "Type": "Shipper",
+          "Value": "284955"
+        }
+      ]
+    }
+  ]
+}

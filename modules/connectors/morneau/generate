@@ -1,0 +1,21 @@
+SCHEMAS=./schemas
+LIB_MODULES=./karrio/schemas/morneau
+find "${LIB_MODULES}" -name "*.py" -exec rm -r {} \;
+touch "${LIB_MODULES}/__init__.py"
+
+quicktype () {
+    echo "Generating $1..."
+    docker run -it -v $PWD:/app -e SCHEMAS=/app/schemas -e LIB_MODULES=/app/karrio/schemas/morneau \
+    karrio/tools /quicktype/script/quicktype --no-uuids --no-date-times --no-enums --src-lang json --lang jstruct \
+    --no-nice-property-names --all-properties-optional --type-as-suffix $@
+}
+
+quicktype --src="${SCHEMAS}/error.json" --out="${LIB_MODULES}/error.py"
+quicktype --src="${SCHEMAS}/error_cancel_shipment.json" --out="${LIB_MODULES}/error_cancel_shipment.py"
+quicktype --src="${SCHEMAS}/error_shipment.json" --out="${LIB_MODULES}/error_shipment.py"
+quicktype --src="${SCHEMAS}/rate_request.json" --out="${LIB_MODULES}/rate_request.py"
+quicktype --src="${SCHEMAS}/rate_response.json" --out="${LIB_MODULES}/rate_response.py"
+quicktype --src="${SCHEMAS}/shipment_purchase_request.json" --out="${LIB_MODULES}/shipment_purchase_request.py"
+quicktype --src="${SCHEMAS}/shipment_purchase_response.json" --out="${LIB_MODULES}/shipment_purchase_response.py"
+quicktype --src="${SCHEMAS}/error_tracking.json" --out="${LIB_MODULES}/error_tracking.py"
+quicktype --src="${SCHEMAS}/trackers_response.json" --out="${LIB_MODULES}/trackers_response.py"
