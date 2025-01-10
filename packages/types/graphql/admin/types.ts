@@ -751,6 +751,7 @@ export interface CreateRateSheet_create_rate_sheet_rate_sheet_services {
   carrier_service_code: string | null;
   description: string | null;
   active: boolean | null;
+  metadata: any | null;
   zones: CreateRateSheet_create_rate_sheet_rate_sheet_services_zones[];
 }
 
@@ -824,6 +825,7 @@ export interface UpdateRateSheet_update_rate_sheet_rate_sheet_services {
   carrier_service_code: string | null;
   description: string | null;
   active: boolean | null;
+  metadata: any | null;
   zones: UpdateRateSheet_update_rate_sheet_rate_sheet_services_zones[];
 }
 

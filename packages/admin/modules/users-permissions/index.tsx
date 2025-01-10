@@ -156,7 +156,9 @@ export default function Page() {
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const permissions = Array.from(formData.getAll("permissions")) as string[];
+    const permissions = Array.from(
+      formData.getAll("permission_groups"),
+    ) as string[];
 
     updateUser.mutate({
       data: {
@@ -314,74 +316,77 @@ export default function Page() {
                           </DropdownMenuContent>
                         </DropdownMenu>
 
-                        <DialogContent>
+                        <DialogContent className="max-h-[90vh] flex flex-col">
                           <DialogHeader>
                             <DialogTitle>Edit User</DialogTitle>
                             <DialogDescription>
                               Update user information, status, and permissions.
                             </DialogDescription>
                           </DialogHeader>
-                          <form onSubmit={handleUpdate} className="space-y-4">
-                            <div className="space-y-2">
-                              <Label htmlFor="edit_full_name">Full Name</Label>
-                              <Input
-                                id="edit_full_name"
-                                name="full_name"
-                                defaultValue={selectedUser?.full_name}
-                                required
-                              />
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <Checkbox
-                                id="is_staff"
-                                name="is_staff"
-                                defaultChecked={selectedUser?.is_staff}
-                              />
-                              <Label htmlFor="is_staff">Staff</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <Checkbox
-                                id="is_active"
-                                name="is_active"
-                                defaultChecked={selectedUser?.is_active}
-                              />
-                              <Label htmlFor="is_active">Active</Label>
-                            </div>
-                            <div className="space-y-2">
-                              <Label>Permissions</Label>
+                          <form
+                            onSubmit={handleUpdate}
+                            className="flex flex-col flex-1"
+                          >
+                            <div className="space-y-4 flex-1 overflow-y-auto">
                               <div className="space-y-2">
-                                {permissionGroups.map(({ node: group }) => (
-                                  <div key={group.id} className="space-y-2">
-                                    <div className="font-medium">
-                                      {group.name}
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-2">
-                                      {group.permissions?.map((permission) => (
-                                        <div
-                                          key={permission}
-                                          className="flex items-center space-x-2"
+                                <Label htmlFor="edit_full_name">
+                                  Full Name
+                                </Label>
+                                <Input
+                                  id="edit_full_name"
+                                  name="full_name"
+                                  defaultValue={selectedUser?.full_name}
+                                  required
+                                />
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <Checkbox
+                                  id="is_staff"
+                                  name="is_staff"
+                                  defaultChecked={selectedUser?.is_staff}
+                                />
+                                <Label htmlFor="is_staff">Staff</Label>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <Checkbox
+                                  id="is_active"
+                                  name="is_active"
+                                  defaultChecked={selectedUser?.is_active}
+                                />
+                                <Label htmlFor="is_active">Active</Label>
+                              </div>
+                              <div className="space-y-2">
+                                <Label>Permission Groups</Label>
+                                <div className="rounded-md border">
+                                  <div className="p-3 space-y-1.5 max-h-[160px] overflow-y-auto">
+                                    {permissionGroups.map(({ node: group }) => (
+                                      <div
+                                        key={group.id}
+                                        className="flex items-center space-x-2 py-0.5 px-1 hover:bg-gray-50 rounded"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          id={`permission-${group.id}`}
+                                          name="permission_groups"
+                                          value={group.id}
+                                          defaultChecked={selectedUser?.permissions?.includes(
+                                            group.id,
+                                          )}
+                                          className="h-4 w-4 rounded border-gray-300"
+                                        />
+                                        <label
+                                          htmlFor={`permission-${group.id}`}
+                                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                         >
-                                          <Checkbox
-                                            id={permission}
-                                            name="permissions"
-                                            value={permission}
-                                            defaultChecked={selectedUser?.permissions?.includes(
-                                              permission,
-                                            )}
-                                          />
-                                          <Label htmlFor={permission}>
-                                            {permission
-                                              .replace(/_/g, " ")
-                                              .toLowerCase()}
-                                          </Label>
-                                        </div>
-                                      ))}
-                                    </div>
+                                          {group.name}
+                                        </label>
+                                      </div>
+                                    ))}
                                   </div>
-                                ))}
+                                </div>
                               </div>
                             </div>
-                            <DialogFooter>
+                            <DialogFooter className="mt-4">
                               <Button type="submit" disabled={isUpdating}>
                                 {isUpdating ? "Saving..." : "Save Changes"}
                               </Button>

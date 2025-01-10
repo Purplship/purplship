@@ -320,6 +320,7 @@ const rateSheetsRouter = router({
         data: z.object({
           name: z.string(),
           carrier_name: z.string(),
+          metadata: z.record(z.any()).optional(),
           services: z
             .array(
               z.object({
@@ -382,6 +383,7 @@ const rateSheetsRouter = router({
           id: z.string(),
           name: z.string().optional(),
           carrier_name: z.string().optional(),
+          metadata: z.record(z.any()).optional(),
           services: z
             .array(
               z.object({

@@ -487,6 +487,7 @@ export const CREATE_RATE_SHEET = gql`
           carrier_service_code
           description
           active
+          metadata
           zones {
             label
             rate
@@ -538,6 +539,7 @@ export const UPDATE_RATE_SHEET = gql`
           carrier_service_code
           description
           active
+          metadata
           zones {
             label
             rate

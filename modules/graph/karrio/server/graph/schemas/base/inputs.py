@@ -499,6 +499,7 @@ class CreateRateSheetMutationInput(utils.BaseInput):
     carrier_name: utils.CarrierNameEnum
     services: typing.Optional[typing.List[CreateServiceLevelInput]] = strawberry.UNSET
     carriers: typing.Optional[typing.List[str]] = strawberry.UNSET
+    metadata: typing.Optional[utils.JSON] = strawberry.UNSET
 
 
 @strawberry.input
@@ -508,6 +509,7 @@ class UpdateRateSheetMutationInput(utils.BaseInput):
     services: typing.Optional[typing.List[UpdateServiceLevelInput]] = strawberry.UNSET
     carriers: typing.Optional[typing.List[str]] = strawberry.UNSET
     remove_missing_services: typing.Optional[bool] = strawberry.UNSET
+    metadata: typing.Optional[utils.JSON] = strawberry.UNSET
 
 
 @strawberry.input
