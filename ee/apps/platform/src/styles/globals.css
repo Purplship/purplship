@@ -1,0 +1,89 @@
+@import "@karrio/insiders/globals.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 248 28% 16%;
+        --foreground: 0 0% 100%;
+
+        --card: 252 24% 20%;
+        --card-foreground: 0 0% 100%;
+
+        --popover: 252 24% 20%;
+        --popover-foreground: 0 0% 100%;
+
+        --primary: 264 72% 47%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary: 176 67% 69%;
+        --secondary-foreground: 252 24% 20%;
+
+        --muted: 252 16% 26%;
+        --muted-foreground: 0 0% 70%;
+
+        --accent: 16 100% 50%;
+        --accent-foreground: 0 0% 100%;
+
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+
+        --border: 252 16% 26%;
+        --input: 252 16% 26%;
+        --ring: 264 72% 47%;
+
+        --radius: 0.5rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-heading;
+    }
+
+    pre,
+    code {
+        @apply font-mono;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Custom styles for scrollbars */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+}
+
+/* Hide scrollbar for specific elements */
+.scrollbar-none {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}

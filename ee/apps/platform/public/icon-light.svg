@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 16.79 21.76"
+   version="1.1"
+   sodipodi:docname="Karrio-Icon.svg"
+   inkscape:export-filename="/Users/danielkobina/Downloads/Karrio-Icon.png"
+   inkscape:export-xdpi="288.79999"
+   inkscape:export-ydpi="288.79999"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)">
+  <metadata
+     id="metadata23">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1666"
+     inkscape:window-height="1159"
+     id="namedview21"
+     showgrid="false"
+     inkscape:zoom="41.572365"
+     inkscape:cx="8.5854562"
+     inkscape:cy="11.165417"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Layer_1" />
+  <defs
+     id="defs12">
+    <style
+       id="style10">.cls-1{fill:#ff4800;}.cls-2{fill:#79e5dd;}.cls-3{fill:#5722cc;}</style>
+  </defs>
+  <path
+     inkscape:export-ydpi="11435.378"
+     inkscape:export-xdpi="11435.378"
+     class="cls-1"
+     d="M6.43,23.23A2.32,2.32,0,0,1,4.1,20.91v-17a2.33,2.33,0,0,1,4.65,0v17A2.32,2.32,0,0,1,6.43,23.23Z"
+     id="path14"
+     transform="translate(-4.1 -1.62)" />
+  <path
+     inkscape:export-ydpi="11435.378"
+     inkscape:export-xdpi="11435.378"
+     class="cls-2"
+     d="M6.42,23.38A2.37,2.37,0,0,1,5.18,23a2.33,2.33,0,0,1-.72-3.2l10.73-17a2.32,2.32,0,0,1,3.93,2.48L8.39,22.3A2.32,2.32,0,0,1,6.42,23.38Z"
+     id="path16"
+     transform="translate(-4.1 -1.62)" />
+  <circle
+     inkscape:export-ydpi="11435.378"
+     inkscape:export-xdpi="11435.378"
+     class="cls-3"
+     cx="12.38"
+     cy="16.93"
+     id="circle18"
+     r="4.41" />
+</svg>

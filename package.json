@@ -19,7 +19,7 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "ee/platform/apps/*",
+    "ee/apps/*",
     "ee/platform/packages/*"
   ],
   "packageManager": "npm@10.8.2"
