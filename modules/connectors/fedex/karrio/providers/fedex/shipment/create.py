@@ -107,6 +107,7 @@ def shipment_request(
         presets=provider_units.PackagePresets,
         shipping_options_initializer=provider_units.shipping_options_initializer,
     )
+
     default_currency = lib.identity(
         options.currency.state
         or settings.default_currency

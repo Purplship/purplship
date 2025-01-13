@@ -92,24 +92,32 @@ def rate_request(
     shipper = lib.to_address(payload.shipper)
     recipient = lib.to_address(payload.recipient)
     service = lib.to_services(payload.services, provider_units.ShippingService).first
+    options = lib.to_shipping_options(
+        payload.options,
+        initializer=provider_units.shipping_options_initializer,
+    )
     packages = lib.to_packages(
         payload.parcels,
         required=["weight"],
+        options=options,
         presets=provider_units.PackagePresets,
+        shipping_options_initializer=provider_units.shipping_options_initializer,
     )
-    options = lib.to_shipping_options(
-        payload.options,
-        package_options=packages.options,
-        initializer=provider_units.shipping_options_initializer,
-    )
+
+    is_intl = shipper.country_code != recipient.country_code
     default_currency = lib.identity(
         options.currency.state
         or settings.default_currency
         or units.CountryCurrency.map(payload.shipper.country_code).value
         or "USD"
     )
-
-    is_intl = shipper.country_code != recipient.country_code
+    weight_unit, dim_unit = lib.identity(
+        provider_units.COUNTRY_PREFERED_UNITS.get(payload.shipper.country_code)
+        or packages.compatible_units
+    )
+    payment = payload.payment or models.Payment(
+        paid_by="sender", account_number=settings.account_number
+    )
     request_types = lib.identity(
         settings.connection_config.rate_request_types.state
         if any(settings.connection_config.rate_request_types.state or [])
@@ -130,9 +138,16 @@ def rate_request(
         for _, option in _options.items()
         if option.state is not False and option.code in provider_units.SHIPMENT_OPTIONS
     ]
+
+    customs = lib.to_customs_info(
+        payload.customs,
+        shipper=payload.shipper,
+        recipient=payload.recipient,
+        weight_unit=weight_unit.value,
+    )
     commodities = lib.identity(
-        packages.items
-        if any(packages.items)
+        (customs.commodities if any(customs.commodities) else packages.items)
+        if any(packages.items) or any(customs.commodities)
         else units.Products(
             [
                 models.Commodity(
